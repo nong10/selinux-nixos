@@ -33,12 +33,12 @@
         [ 
           (mkIf config.refpolicy.configuration.config.genFile {
             environment.etc."selinux/config".text = ''
-              ${config.selinux-refpolicy.configuration.config.text}
+              ${config.refpolicy.configuration.config.text}
             '';
           })
           (mkIf config.refpolicy.configuration.semanage_config.genFile {
             environment.etc."selinux/semanage.conf".text = ''
-              ${config.selinux-refpolicy.configuration.semanage_config.text}
+              ${config.refpolicy.configuration.semanage_config.text}
             '';
           })
         ];     
