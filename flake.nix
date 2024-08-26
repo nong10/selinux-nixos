@@ -10,7 +10,7 @@
   with pkgs.lib;
   {
     nixosModules.default = {config, ... }: {
-      options.selinux-refpolicy.configuration = {
+      options.refpolicy.configuration = {
         config.genFile = mkEnableOption "generate /etc/selinux/config";
         semanage_config.genFile = mkEnableOption "generate /etc/selinux/semanage.conf";
 
@@ -30,16 +30,16 @@
       };
 
       config =  {
-        mkIf config.selinux-refpolicy.configuration.config.genFile {
+        (mkIf config.refpolicy.configuration.config.genFile {
           environment.etc."selinux/config".text = ''
             ${config.selinux-refpolicy.configuration.config.text}
           '';
-        }
-        mkIf config.selinux-refpolicy.configuration.semanage_config.genFile {
+        })
+        (mkIf config.refpolicy.configuration.semanage_config.genFile {
           environment.etc."selinux/semanage.conf".text = ''
             ${config.selinux-refpolicy.configuration.semanage_config.text}
           '';
-        }
+        })
       };
     };
 
