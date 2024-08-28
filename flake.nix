@@ -6,7 +6,7 @@
   outputs = { self, nixpkgs, ... }@inputs:
   let
     system = "x86_64-linux";
-    pkgs = import nixpkgs {};
+    pkgs = import nixpkgs { system = "x86_64-linux" };
   in
   with pkgs.lib;
   {
