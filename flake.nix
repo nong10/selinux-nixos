@@ -25,7 +25,9 @@
         };
         semanage_config.text = mkOption {
           type = types.str;
-          default = "";
+          default = ''
+            compiler-directory=${pkgs.policycoreutils}/libexec/selinux/hll
+          '';
           description = "text inside /etc/selinux/semanage.conf";
         };
       };
